@@ -39,4 +39,9 @@ class Email implements Serializable {
         return content;
     }
 
+    public void send(){
+        SendEmail se = new SendEmail();
+        se.send(this);
+    }
+
 }

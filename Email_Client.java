@@ -79,7 +79,7 @@ public class Email_Client {
                 }
                 // code to send an email
                 Email email = new Email(inputs[0], inputs[1], inputs[2], new Date());
-                SendEmail.send(email);
+                email.send();
                 storeEmail(email);                // storing the sent email object to hard disk by serializing
                 System.out.println("Email sent to: " + inputs[0]);
 

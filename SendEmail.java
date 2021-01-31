@@ -10,7 +10,7 @@ public class SendEmail {
     private static final String password = "al2045818";
 
     private Properties properties;
-    private static Session session;
+    private Session session;
     private static final String from = "ishadijaz@gmail.com";
 
     SendEmail(){
@@ -34,7 +34,7 @@ public class SendEmail {
         properties.put("mail.smtp.port", "587");
     }
 
-    public static void send(Email email){
+    public void send(Email email){
         MimeMessage message = new MimeMessage(session);
         try {
             message.setFrom(new InternetAddress(from));
