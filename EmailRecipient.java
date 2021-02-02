@@ -2,7 +2,7 @@ package assignment1;
 
 import java.io.Serializable;
 
-public abstract class EmailRecipient implements Serializable {
+public abstract class EmailRecipient {
     private String name;
     private String email;
 
@@ -13,5 +13,9 @@ public abstract class EmailRecipient implements Serializable {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getName() {
+        return name;
     }
 }

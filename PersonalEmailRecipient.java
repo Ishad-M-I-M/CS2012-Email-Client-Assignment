@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class PersonalEmailRecipient extends EmailRecipient implements Greetable{
     private String nickname;
-    private Date birthday;
-    PersonalEmailRecipient(String name,String nickname, String email, Date birthday) {
+    private NewDate birthday;
+    PersonalEmailRecipient(String name,String nickname, String email, NewDate birthday) {
         super(name, email);
         this.nickname = nickname;
         this.birthday = birthday;
@@ -16,7 +16,8 @@ public class PersonalEmailRecipient extends EmailRecipient implements Greetable{
         return "hugs and love on your birthday. "+sender; // temp
     }
 
-    public Date getBirthday() {
+    @Override
+    public NewDate getBirthday() {
         return birthday;
     }
 }

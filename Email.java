@@ -1,21 +1,19 @@
 package assignment1;
 
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+
 import java.io.Serializable;
 
 import java.util.Date;
-import java.util.Properties;
 
-class Email implements Serializable {
+
+public class Email implements Serializable {
 
     private String to;
     private String subject;
     private String content;
-    private Date date;
+    private String date;
 
-    Email(String to, String subject, String content, Date date){
+    public Email(String to, String subject, String content, String date){
         this.to = to;
         this.subject = subject;
         this.content = content;
@@ -24,7 +22,7 @@ class Email implements Serializable {
     }
 
     public void printDetails(){
-        System.out.println("Sent to :"+to+ ", Subject :"+subject +", Content :"+content );
+        System.out.println("Sent to :"+to+ ", Subject :"+subject +", Content :"+content + ", sent on :"+date );
     }
 
     public String getTo() {
@@ -39,9 +37,14 @@ class Email implements Serializable {
         return content;
     }
 
+    public String getDate() {
+        return date;
+    }
+
     public void send(){
-        SendEmail se = new SendEmail();
-        se.send(this);
+//        SendEmail se = new SendEmail();
+//        se.send(this);
+        System.out.println("Email sent to : "+ to);
     }
 
 }
