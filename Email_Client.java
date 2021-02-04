@@ -3,16 +3,18 @@ package assignment1;
 // your index number : - 190241X
 
 //import libraries
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Email_Client {
     private static ArrayList<EmailRecipient> emailRecipients = EmailRecipientManager.readEmailRecipients();
     private static ArrayList<Email> emailsSent = EmailIO.readEmailsFromLog();
-    private static int numberOfRecipients = emailRecipients.size();
+    private static int numberOfRecipients = 0;
     private static ArrayList<Greetable> greetableRecipients = filterGreetableRecipients();
 
     public static void main(String[] args) {
+        System.out.println("Emailing birthday wishes...");
         emailBirthdayWishes();
 
         boolean cont = true;
@@ -28,7 +30,6 @@ public class Email_Client {
 
         int option = scanner.nextInt();
         scanner.reset();
-        scanner.nextLine();     // to skip the newline character stored in buffer after reading next int
         String inputString;
         switch(option){
 
@@ -37,7 +38,8 @@ public class Email_Client {
                 // Use a single input to get all the details of a recipient
                 // code to add a new recipient
                 // store details in clientList.txt file
-
+                scanner.nextLine();     // to skip the newline character stored in buffer after reading nextInt
+                System.out.println("Enter recipient details : ");
                 inputString = scanner.nextLine();
                 emailRecipients.add(EmailRecipientManager.createRecipientObject(inputString));    //  creating and adding recipient to the ArrayListvvvvvvvvvvvvvvvvvvvvvvvv
                 EmailRecipientManager.storeEmailRecipient(inputString);
@@ -47,6 +49,7 @@ public class Email_Client {
 
             case 2:
                 // input format - email, subject, content
+                scanner.nextLine();     // to skip the newline character stored in buffer after reading nextInt
                 String[] inputs = new String[3];
                 String[] inputDetails = {"Email : ", "Subject : ", "Content : "};
                 for (int i=0; i < 3; i++){
@@ -58,12 +61,19 @@ public class Email_Client {
 
                 Email email = new Email(inputs[0], inputs[1], inputs[2], (new NewDate()).toString());
                 send(email);
+                try {
+                    EmailIO.storeEmail(email);
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
 
                 break;
 
             case 3:
                 // input format - yyyy/MM/dd (ex: 2018/09/17)
                 // code to print recipients who have birthdays on the given date
+                scanner.nextLine();     // to skip the newline character stored in buffer after reading nextInt
+                System.out.println("Enter date : ");
                 inputString = scanner.nextLine();
                 NewDate date = new NewDate(inputString);
                 for (EmailRecipient e: emailRecipients){
@@ -79,11 +89,13 @@ public class Email_Client {
             case 4:
                 // input format - yyyy/MM/dd (ex: 2018/09/17)
                 // code to print the details of all the emails sent on the input date
+                scanner.nextLine();     // to skip the newline character stored in buffer after reading nextInt
+                System.out.println("Enter date : ");
                 inputString = scanner.nextLine().trim();
                 for (Email sentEmail: emailsSent ) {
-                    //if (sentEmail.getDate().equals(inputString)){
+                    if (sentEmail.getDate().equals(inputString)){
                         sentEmail.printDetails();
-                    //}
+                    }
                 }
                 break;
             case 5:

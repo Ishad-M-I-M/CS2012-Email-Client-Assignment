@@ -1,10 +1,7 @@
 package assignment1;
-
+import com.sun.mail.util.MailConnectException;
 
 import java.io.Serializable;
-
-import java.util.Date;
-
 
 public class Email implements Serializable {
 
@@ -41,9 +38,9 @@ public class Email implements Serializable {
         return date;
     }
 
-    public void send(){
-//        SendEmail se = new SendEmail();
-//        se.send(this);
+    public void send()  {
+//        EmailSender sender = new EmailSender();
+//        sender.send(this);
         System.out.println("Email sent to : "+ to);
     }
 

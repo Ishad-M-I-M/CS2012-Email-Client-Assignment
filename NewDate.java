@@ -35,7 +35,14 @@ public class NewDate {
     }
 
     public String toString(){
-        return this.year+"/"+this.month+"/"+this.day;
+        if (this.month <10 && this.day<10)
+            return this.year+"/0"+this.month+"/0"+this.day;
+        else if (this.month<10)
+            return this.year+"/0"+this.month+"/"+this.day;
+        else if (this.day <10)
+            return this.year+"/"+this.month+"/0"+this.day;
+        else
+            return this.year+"/"+this.month+"/"+this.day;
     }
 
     public boolean equals(NewDate other){

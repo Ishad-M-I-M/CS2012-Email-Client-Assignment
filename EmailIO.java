@@ -23,6 +23,24 @@ public final class EmailIO {
 
     }
 
+    public static void storeEmail(Email email) throws IOException {
+        File file = new File("emailLog.ser");
+        if (file.exists()){
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file, true)){
+                protected void writeStreamHeader() throws IOException {
+                    reset();
+                }
+            };
+            oos.writeObject(email);
+        }
+        else{
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+            oos.writeObject(email);
+        }
+    }
+
+
+
     public static ArrayList<Email> readEmailsFromLog(String fileName) throws IOException {
         ArrayList<Email> emails = new ArrayList<>();
         FileInputStream fis = new FileInputStream(fileName);

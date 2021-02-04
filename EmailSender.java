@@ -5,15 +5,15 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-public class SendEmail {
+public class EmailSender {
     private static final String username = "ishadijaz@gmail.com";
     private static final String password = "al2045818";
 
     private Properties properties;
-    private Session session;
+    private final Session session;
     private static final String from = "ishadijaz@gmail.com";
 
-    SendEmail(){
+    EmailSender(){
 
         setProperties();
         // intializing session for object
