@@ -8,21 +8,6 @@ public final class EmailIO {
 
     }
 
-    public static void storeEmails(ArrayList<Email> emailsSent) {
-
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("emailLog.ser"));
-            for (Email e: emailsSent){
-                oos.writeObject(e);
-            }
-            oos.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
     public static void storeEmail(Email email) throws IOException {
         File file = new File("emailLog.ser");
         if (file.exists()){

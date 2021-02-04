@@ -61,11 +61,6 @@ public class Email_Client {
 
                 Email email = new Email(inputs[0], inputs[1], inputs[2], (new NewDate()).toString());
                 send(email);
-                try {
-                    EmailIO.storeEmail(email);
-                }catch (IOException e){
-                    e.printStackTrace();
-                }
 
                 break;
 
@@ -103,7 +98,7 @@ public class Email_Client {
                 System.out.println("Number of email recipients in the application : "+numberOfRecipients);
                 break;
             case 6:
-                EmailIO.storeEmails(emailsSent);
+
                 cont = false;
                 break;
             default:
@@ -143,12 +138,16 @@ public class Email_Client {
     private static void send(Email email){
         email.send();
         emailsSent.add(email);
+        try {
+            EmailIO.storeEmail(email);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
 
 }
 
-// create more classes needed for the implementation (remove the  public access modifier from classes when you submit your code)
 
 
 
