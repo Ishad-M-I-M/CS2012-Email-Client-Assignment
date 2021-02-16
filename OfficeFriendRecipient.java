@@ -9,7 +9,7 @@ public class OfficeFriendRecipient extends OfficialEmailRecipient implements Gre
 
     @Override
     public String greetForBirthday(String sender) {
-        return "Wish you a Happy Birthday. "+sender; // temp
+        return "Wish you a Happy Birthday. "+sender;
     }
 
     @Override

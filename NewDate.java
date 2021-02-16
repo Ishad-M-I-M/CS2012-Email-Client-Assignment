@@ -2,6 +2,7 @@ package assignment1;
 
 import java.util.Date;
 
+// customized date class for handle date related functions in the assignment
 public class NewDate {
     private int year;
     private int month;

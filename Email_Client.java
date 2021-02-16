@@ -95,21 +95,15 @@ public class Email_Client {
                 break;
             case 5:
                 // code to print the number of recipient objects in the application
-                System.out.println("Number of email recipients in the application : "+numberOfRecipients);
+                System.out.println("Number of email recipients added to the application in current execution: "+numberOfRecipients);
                 break;
             case 6:
-
                 cont = false;
                 break;
             default:
                 System.out.println("Invalid Input");
         }
         }
-
-        // start email client
-        // code to create objects for each recipient in clientList.txt
-        // use necessary variables, methods and classes
-
 
     }
 
@@ -122,6 +116,7 @@ public class Email_Client {
         }
         return greetableRecipients;
     }
+
     private static void emailBirthdayWishes(){
         for( Greetable greetable: greetableRecipients){
             if(greetable.getBirthday().checkForBirthday()){

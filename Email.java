@@ -1,5 +1,5 @@
 package assignment1;
-import com.sun.mail.util.MailConnectException;
+
 
 import java.io.Serializable;
 
@@ -39,8 +39,8 @@ public class Email implements Serializable {
     }
 
     public void send()  {
-//        EmailSender sender = new EmailSender();
-//        sender.send(this);
+        EmailSender sender = new EmailSender();
+        sender.send(this);
         System.out.println("Email sent to : "+ to);
     }
 

@@ -3,10 +3,11 @@ package assignment1;
 import java.io.*;
 import java.util.ArrayList;
 
-public final class EmailIO {
-    private EmailIO(){
+// class to handle the functionalities regarding Email object serialization and deserialization
+public class EmailIO {
 
-    }
+    // made constructor private for not to allow to create a object from outside
+    private EmailIO(){}
 
     public static void storeEmail(Email email) throws IOException {
         File file = new File("emailLog.ser");

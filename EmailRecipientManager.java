@@ -3,6 +3,7 @@ package assignment1;
 import java.io.*;
 import java.util.ArrayList;
 
+// class to handle
 public class EmailRecipientManager {
 
     private static String fileName = "clientList.txt";

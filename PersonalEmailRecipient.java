@@ -1,7 +1,5 @@
 package assignment1;
 
-import java.util.Date;
-
 public class PersonalEmailRecipient extends EmailRecipient implements Greetable{
     private String nickname;
     private NewDate birthday;
@@ -13,7 +11,7 @@ public class PersonalEmailRecipient extends EmailRecipient implements Greetable{
 
     @Override
     public String greetForBirthday(String sender) {
-        return "hugs and love on your birthday. "+sender; // temp
+        return "hugs and love on your birthday. "+sender;
     }
 
     @Override
