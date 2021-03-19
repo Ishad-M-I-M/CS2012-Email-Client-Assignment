@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 public class Email_Client {
     private static ArrayList<EmailRecipient> emailRecipients = EmailRecipientManager.readEmailRecipients();
-    private static ArrayList<Email> emailsSent = EmailIO.readEmailsFromLog();
-    private static int numberOfRecipients = 0;
+    private static ArrayList<Email> emailsSent = EmailIO.readSentEmailsFromLog();
+    private static int numberOfRecipients = emailRecipients.size();
     private static ArrayList<Greetable> greetableRecipients = filterGreetableRecipients();
 
     public static void main(String[] args) {
@@ -68,7 +68,7 @@ public class Email_Client {
                 // input format - yyyy/MM/dd (ex: 2018/09/17)
                 // code to print recipients who have birthdays on the given date
                 scanner.nextLine();     // to skip the newline character stored in buffer after reading nextInt
-                System.out.println("Enter date : ");
+                System.out.println("Enter date (yyyy/MM/dd): ");
                 inputString = scanner.nextLine();
                 NewDate date = new NewDate(inputString);
                 for (EmailRecipient e: emailRecipients){
@@ -85,11 +85,11 @@ public class Email_Client {
                 // input format - yyyy/MM/dd (ex: 2018/09/17)
                 // code to print the details of all the emails sent on the input date
                 scanner.nextLine();     // to skip the newline character stored in buffer after reading nextInt
-                System.out.println("Enter date : ");
+                System.out.println("Enter date (yyyy/MM/dd): ");
                 inputString = scanner.nextLine().trim();
                 for (Email sentEmail: emailsSent ) {
                     if (sentEmail.getDate().equals(inputString)){
-                        sentEmail.printDetails();
+                        sentEmail.printDetailsSent();
                     }
                 }
                 break;
@@ -131,13 +131,17 @@ public class Email_Client {
     }
 
     private static void send(Email email){
-        email.send();
-        emailsSent.add(email);
-        try {
-            EmailIO.storeEmail(email);
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        Runnable r = () -> {
+            email.send();
+            emailsSent.add(email);
+            try {
+                EmailIO.storeSentEmail(email);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        };
+        (new Thread(r)).start();
+
     }
 
 

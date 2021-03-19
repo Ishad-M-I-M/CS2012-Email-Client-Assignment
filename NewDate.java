@@ -24,7 +24,7 @@ public class NewDate {
         Date today = new Date();
         this.year = today.getYear()+1900;
         this.month = today.getMonth()+1;
-        this.day = today.getDay();
+        this.day = today.getDate();
     }
 
     public boolean checkForBirthday(NewDate date){

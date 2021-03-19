@@ -5,12 +5,13 @@ import java.util.ArrayList;
 
 // class to handle the functionalities regarding Email object serialization and deserialization
 public class EmailIO {
-
+    private static String emailLog_sent =  "sentEmailLog.ser";
+    private static String emailLog_recieved = "recievedEmailLog.ser";
     // made constructor private for not to allow to create a object from outside
     private EmailIO(){}
 
-    public static void storeEmail(Email email) throws IOException {
-        File file = new File("emailLog.ser");
+    private static void storeEmail(Email email, String fileName) throws IOException {
+        File file = new File(fileName);
         if (file.exists()){
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file, true)){
                 protected void writeStreamHeader() throws IOException {
@@ -26,8 +27,7 @@ public class EmailIO {
     }
 
 
-
-    public static ArrayList<Email> readEmailsFromLog(String fileName) throws IOException {
+    private static ArrayList<Email> readEmailsFromLog(String fileName) throws IOException {
         ArrayList<Email> emails = new ArrayList<>();
         FileInputStream fis = new FileInputStream(fileName);
         ObjectInputStream ois = new ObjectInputStream(fis);
@@ -44,16 +44,33 @@ public class EmailIO {
         return emails;
     }
 
-    public static ArrayList<Email> readEmailsFromLog(){
-        File file = new File("emailLog.ser");
+    private static ArrayList<Email> readEmailsFromFile(String fileName){
+        File file = new File(fileName);
         if (file.exists()){
             try{
-                return readEmailsFromLog("emailLog.ser");
+                return readEmailsFromLog(fileName);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
         return new ArrayList<>();
+    }
+
+    public static ArrayList<Email> readSentEmailsFromLog(){
+        return readEmailsFromFile(emailLog_sent);
+    }
+
+    public static ArrayList<Email> readRecievedEmailsFromLog(){
+        return readEmailsFromFile(emailLog_recieved);
+    }
+
+
+    public static void storeSentEmail(Email email) throws IOException {
+        storeEmail(email, emailLog_sent );
+    }
+
+    public static void storeRecievedEmail(Email email) throws IOException {
+        storeEmail(email, emailLog_recieved );
     }
 }
