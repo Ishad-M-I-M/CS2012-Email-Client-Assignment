@@ -22,6 +22,10 @@ public class Email implements Serializable {
         System.out.println("Sent to :"+to_or_from+ ", Subject :"+subject +", Content :"+content + ", sent on :"+date );
     }
 
+    public void printDetailsRecieved(){
+        System.out.println("Recieved From:"+to_or_from+ ", Subject :"+subject +", Content :"+content + ", received on :"+date );
+    }
+
     public String getTo_or_from() {
         return to_or_from;
     }

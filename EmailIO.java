@@ -6,7 +6,7 @@ import java.util.ArrayList;
 // class to handle the functionalities regarding Email object serialization and deserialization
 public class EmailIO {
     private static String emailLog_sent =  "sentEmailLog.ser";
-    private static String emailLog_recieved = "recievedEmailLog.ser";
+    private static String emailLog_recieved = "receivedEmailLog.ser";
     // made constructor private for not to allow to create a object from outside
     private EmailIO(){}
 
@@ -70,7 +70,8 @@ public class EmailIO {
         storeEmail(email, emailLog_sent );
     }
 
-    public static void storeRecievedEmail(Email email) throws IOException {
+    public static boolean storeRecievedEmail(Email email) throws IOException {
         storeEmail(email, emailLog_recieved );
+        return true;
     }
 }

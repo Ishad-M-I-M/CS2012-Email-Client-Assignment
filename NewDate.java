@@ -27,6 +27,12 @@ public class NewDate {
         this.day = today.getDate();
     }
 
+    public NewDate(Date date){
+        this.year = date.getYear()+1900;
+        this.month = date.getMonth()+1;
+        this.day = date.getDate();
+    }
+
     public boolean checkForBirthday(NewDate date){
         return (this.month == date.month) && (this.day == date.day);
     }
