@@ -10,9 +10,10 @@ public class NewBlockingQueue {
     public NewBlockingQueue(int MAX_SIZE){
         emails = new LinkedList<>();
         this.MAX_SIZE = MAX_SIZE;
+        this.currSize = 0;
     }
 
-    public synchronized void recieveEmail(Email email){
+    public synchronized void pushEmail(Email email){
         while(currSize >= MAX_SIZE){
             try {
                 wait();
@@ -22,15 +23,21 @@ public class NewBlockingQueue {
         }
         emails.add(email);
         currSize++;
+        notifyAll();
+
     }
 
-    public synchronized void storeEmail(){
+    public synchronized Email getEmail() throws InterruptedException {
         while (currSize <= 0){
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+           wait();
         }
+        Email email = emails.remove(0);
+        currSize -- ;
+        notifyAll();
+        return email;
+    }
+
+    public boolean isEmpty(){
+        return currSize == 0;
     }
 }

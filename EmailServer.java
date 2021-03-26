@@ -3,7 +3,7 @@ package assignment1;
 import javax.mail.Session;
 import java.util.Properties;
 
-public abstract class EmailServer {
+public abstract class EmailServer extends Thread{
     String username ;
     String password ;
 
@@ -14,7 +14,7 @@ public abstract class EmailServer {
         this.password = password;
         this.properties = new Properties();
         setProperties(properties);
-        session = startSession();
+        this.session = startSession();
     }
 
     public EmailServer(){
@@ -22,7 +22,7 @@ public abstract class EmailServer {
         this.password = "al2045818";
         this.properties = new Properties();
         setProperties(properties);
-        startSession();
+        this.session = startSession();
     }
 
     abstract void setProperties(Properties properties);

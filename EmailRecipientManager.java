@@ -3,7 +3,7 @@ package assignment1;
 import java.io.*;
 import java.util.ArrayList;
 
-// class to handle
+// class to handle functions of all Email recipients
 public class EmailRecipientManager {
 
     private static String fileName = "clientList.txt";
@@ -19,31 +19,14 @@ public class EmailRecipientManager {
 
     protected static ArrayList<EmailRecipient> readEmailRecipients(){
         ArrayList<EmailRecipient> emailRecipients = new ArrayList<>();
-        File file = new File(fileName);
-        if (file.exists()) {
-            try {
-                BufferedReader br = new BufferedReader(new FileReader(file));
-                String s;
-                while ((s = br.readLine()) != null){
-                    emailRecipients.add(createRecipientObject(s));
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        for( Object recipient: FileReaderWriter.read(fileName)){
+            emailRecipients.add(createRecipientObject((String) recipient));
         }
         return emailRecipients;
     }
 
     protected static void storeEmailRecipient(String inString){
-        try {
-            File file = new File(fileName);
-            BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
-            bw.append(inString).append("\n");
-            bw.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FileReaderWriter.write(fileName, inString);
     }
 
     protected static EmailRecipient createRecipientObject(String inputString){

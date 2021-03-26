@@ -56,4 +56,9 @@ public class NewDate {
         return (this.year == other.year) && (this.month == other.month) && (this.day == other.day);
     }
 
+    public static String getCurrentTime(){
+        Date date = new Date();
+        return (date.getHours())+":"+date.getMinutes()+":"+date.getSeconds();
+    }
+
 }

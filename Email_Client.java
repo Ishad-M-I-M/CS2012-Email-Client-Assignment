@@ -6,6 +6,7 @@ package assignment1;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.BlockingDeque;
 
 public class Email_Client {
     private static ArrayList<EmailRecipient> emailRecipients = EmailRecipientManager.readEmailRecipients();
@@ -14,6 +15,24 @@ public class Email_Client {
     private static ArrayList<Greetable> greetableRecipients = filterGreetableRecipients();
 
     public static void main(String[] args) {
+        // code to simulate producer consumer problem
+        NewBlockingQueue newBlockingQueue = new NewBlockingQueue(5);
+        EmailReceiver emailReceiver = new EmailReceiver(newBlockingQueue);
+        ReceivedEmailSerializer receivedEmailSerializer = new ReceivedEmailSerializer(newBlockingQueue);
+
+        // observers for email receiver
+        EmailStatRecorder emailStatRecorder = new EmailStatRecorder();
+        EmailStatPrinter emailStatPrinter = new EmailStatPrinter();
+
+        // attaching observers for email receiver observable
+        emailReceiver.attach(emailStatPrinter);
+        emailReceiver.attach(emailStatRecorder);
+
+        //starting the email receiving and storing threads
+        emailReceiver.start();
+        receivedEmailSerializer.start();
+
+
         System.out.println("Emailing birthday wishes...");
         emailBirthdayWishes();
 
@@ -99,6 +118,8 @@ public class Email_Client {
                 break;
             case 6:
                 cont = false;
+                emailReceiver.kill();
+                receivedEmailSerializer.kill();
                 break;
             default:
                 System.out.println("Invalid Input");
