@@ -60,7 +60,7 @@ public class EmailReceiver extends EmailServer{
                         mes.getContent().toString(),
                         (new NewDate(mes.getReceivedDate())).toString());
                 notifyAllObservers();
-                blockingQueue.pushEmail(email);
+                blockingQueue.enqueue(email);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -69,6 +69,7 @@ public class EmailReceiver extends EmailServer{
 
     public void kill(){
         this.alive = false;
+        interrupt();
     }
 
     private void notifyAllObservers(){
@@ -91,10 +92,12 @@ public class EmailReceiver extends EmailServer{
             try {
                 pushReceivedEmails();
                 sleep(500);
-            } catch (MessagingException | InterruptedException e) {
-                e.printStackTrace();
+            } catch (MessagingException me) {
+                me.printStackTrace();
+            } catch (InterruptedException e) {
+                System.out.println("stopped execution of email receiver");
             }
         }
-        System.out.println("stopped execution of email receiver");
+
     }
 }

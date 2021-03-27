@@ -13,7 +13,7 @@ public class NewBlockingQueue {
         this.currSize = 0;
     }
 
-    public synchronized void pushEmail(Email email){
+    public synchronized void enqueue(Email email){
         while(currSize >= MAX_SIZE){
             try {
                 wait();
@@ -27,7 +27,7 @@ public class NewBlockingQueue {
 
     }
 
-    public synchronized Email getEmail() throws InterruptedException {
+    public synchronized Email dequeue() throws InterruptedException {
         while (currSize <= 0){
            wait();
         }

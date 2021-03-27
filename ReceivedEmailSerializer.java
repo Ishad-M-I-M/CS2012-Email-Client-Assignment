@@ -26,7 +26,7 @@ public class ReceivedEmailSerializer extends Thread{
     public void run() {
         try {
             while (alive) {
-                Email email = newBlockingQueue.getEmail();
+                Email email = newBlockingQueue.dequeue();
                 boolean result = EmailIO.storeRecievedEmail(email);
                 if(result){
                     System.out.println(" ------------------------------------------------------------------------------- stored Received Email");
