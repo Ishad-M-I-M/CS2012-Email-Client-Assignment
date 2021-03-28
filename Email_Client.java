@@ -6,7 +6,6 @@ package assignment1;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.concurrent.BlockingDeque;
 
 public class Email_Client {
     private static ArrayList<EmailRecipient> emailRecipients = EmailRecipientManager.readEmailRecipients();
