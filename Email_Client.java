@@ -15,7 +15,7 @@ public class Email_Client {
 
     public static void main(String[] args) {
         // code to simulate producer consumer problem
-        NewBlockingQueue newBlockingQueue = new NewBlockingQueue(5);
+        NewBlockingQueue newBlockingQueue = new NewBlockingQueue(3);
         EmailReceiver emailReceiver = new EmailReceiver(newBlockingQueue);
         ReceivedEmailSerializer receivedEmailSerializer = new ReceivedEmailSerializer(newBlockingQueue);
 
@@ -27,7 +27,9 @@ public class Email_Client {
         emailReceiver.attach(emailStatPrinter);
         emailReceiver.attach(emailStatRecorder);
 
-        //starting the email receiving and storing threads
+        //starting the email receiving and storing threads along with setting thread priorities
+        emailReceiver.setPriority(5);
+        receivedEmailSerializer.setPriority(4);
         emailReceiver.start();
         receivedEmailSerializer.start();
 
