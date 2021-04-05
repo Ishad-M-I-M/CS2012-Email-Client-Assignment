@@ -1,6 +1,7 @@
 package assignment1;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -59,7 +60,7 @@ public class EmailReceiver extends EmailServer{
                         mes.getSubject(),
                         mes.getContent().toString(),
                         (new NewDate(mes.getReceivedDate())).toString());
-                notifyAllObservers();
+                notifyAllObservers(mes.getReceivedDate());
                 blockingQueue.enqueue(email);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -72,9 +73,9 @@ public class EmailReceiver extends EmailServer{
         interrupt();
     }
 
-    private void notifyAllObservers(){
+    private void notifyAllObservers(Date date){
         for( Observer observer: observers){
-            observer.update();
+            observer.update(date);
         }
     }
 

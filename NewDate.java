@@ -58,7 +58,11 @@ public class NewDate {
 
     public static String getCurrentTime(){
         Date date = new Date();
-        return (date.getHours())+":"+date.getMinutes()+":"+date.getSeconds();
+        return ((new NewDate(date)).toString() +" "+ date.getHours())+":"+date.getMinutes()+":"+date.getSeconds();
+    }
+
+    public static String getTime(Date date){
+        return ((new NewDate(date)).toString() +" "+ date.getHours())+":"+date.getMinutes()+":"+date.getSeconds();
     }
 
 }
